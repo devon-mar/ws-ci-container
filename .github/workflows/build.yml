@@ -23,13 +23,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Get the distro version
+        id: distro-version
+        run: |
+          sed -nr 's/FROM ${{ matrix.distro }}:(.*)/VERSION=\1/p' Dockerfile.${{ matrix.distro }} >> "$GITHUB_OUTPUT"
+
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
         with:
           images: ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value=${{ matrix.distro }}
+            type=raw,value=${{ matrix.distro }}-${{ steps.distro-version.outputs.VERSION }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
