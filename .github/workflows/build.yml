@@ -17,6 +17,9 @@ jobs:
           - fedora
           - debian
 
+    permissions:
+      packages: write
+
     steps:
       - uses: actions/checkout@v3
 
