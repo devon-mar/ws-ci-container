@@ -14,4 +14,5 @@ RUN apt-get update \
 USER ${UID}
 
 RUN python3 -m pip --no-cache-dir install --user pipx \
+    && python3 -m pipx ensurepath \
     && python3 -m pipx install ansible --include-deps --pip-args="--no-cache-dir"
