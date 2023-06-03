@@ -6,6 +6,8 @@ ARG UID=1001
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get dist-upgrade -y \
     && apt-get install -y --no-install-recommends python3 python3-pip python3-venv sudo \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
