@@ -1,4 +1,4 @@
-FROM debian:11
+FROM debian:12
 
 # https://github.com/actions/runner-images/issues/6930
 ARG UID=1001
