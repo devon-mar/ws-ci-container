@@ -4,12 +4,11 @@ FROM fedora:38
 ARG UID=1001
 
 RUN dnf update -y \
-    && dnf install -y python3 python3-pip \
+    && dnf install -y python3 pipx \
     && useradd -m -u ${UID} github \
     && echo 'github ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 USER ${UID}
 
-RUN python3 -m pip --no-cache-dir install --user pipx \
-    && python3 -m pipx ensurepath \
+RUN python3 -m pipx ensurepath \
     && python3 -m pipx install ansible --include-deps --pip-args="--no-cache-dir"
