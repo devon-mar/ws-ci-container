@@ -1,4 +1,4 @@
-FROM debian:12
+FROM debian:12-slim
 
 # https://github.com/actions/runner-images/issues/6930
 ARG UID=1001
@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get dist-upgrade -y \
-    && apt-get install -y --no-install-recommends python3 python3-pip python3-venv sudo \
+    && apt-get install -y --no-install-recommends python3 pipx sudo \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -m -u ${UID} github \
@@ -16,6 +16,5 @@ RUN apt-get update \
 
 USER ${UID}
 
-RUN python3 -m pip --no-cache-dir install --user pipx \
-    && python3 -m pipx ensurepath \
+RUN python3 -m pipx ensurepath \
     && python3 -m pipx install ansible --include-deps --pip-args="--no-cache-dir"
