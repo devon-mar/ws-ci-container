@@ -26,7 +26,7 @@ jobs:
       - name: Get the distro version
         id: distro-version
         run: |
-          sed -nr 's/FROM ${{ matrix.distro }}:(.*)/VERSION=\1/p' Dockerfile.${{ matrix.distro }} >> "$GITHUB_OUTPUT"
+          sed -nr 's/FROM [a-z]+:([0-9]+).*/VERSION=\1/p' Dockerfile.${{ matrix.distro }} >> "$GITHUB_OUTPUT"
 
       - name: Docker meta
         id: meta
