@@ -1,4 +1,4 @@
-FROM fedora:38
+FROM fedora:39
 
 # https://github.com/actions/runner-images/issues/6930
 ARG UID=1001
